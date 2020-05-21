@@ -13,8 +13,31 @@ A mobile application which uses RandomUser REST API.
 * Koin - Dependency injection
 * Coil - Image loading
 
+## Architecture choices
+
+### Clean Architerture
+This application is based on a semi clean architecture with :
+#### DataAdapter
+This module includes providers which will call fucntion of remote data service or locale data
+service. It also includes Adapters(which are implementation of providers). Adapters have
+the responsability to fetch data from remote or locale source.
+They handle exceptions(e.g IOException) and transform response into a business model or
+throw a dedicated exception.
+#### Domain
+In this module the useCases are in charge to call the provider and transform the result (a
+business model or a dedicated exception) into an outcome<Model, Error> to be handled by
+presentation layer.
+#### Presentatiobn
+Presentation are in charge to provides dedicated LiveDate or Event according to result received
+by the domain layer. It tranform business model into Data to be displayed by View layer.
+#### View
+This module includes Activity, fragment or UI related widgets. It observes data from presentation
+layer and can call function of ViewModel.
+
 ## State
-Done
+I have implemented the online mode and add some tests on adapter and useCase. But I didn't have
+enough time to implement offline mode, have a better covergae of my existing tests and add some
+for the viewModel.
 
 ## Licence
 ```
