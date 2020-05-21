@@ -6,8 +6,8 @@ import retrofit2.http.*
 
 interface RandomUserService {
 
-    @GET
+    @GET("api/")
     fun getPaginedUsers(@Query("page") page: Int,
-                        @Query("results") results: Long): Call<PaginedUserReponse>
+                        @Query("results") results: Int): Call<PaginedUserReponse>
 
 }

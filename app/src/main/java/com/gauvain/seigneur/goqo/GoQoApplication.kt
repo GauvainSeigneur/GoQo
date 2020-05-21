@@ -1,7 +1,10 @@
 package com.gauvain.seigneur.goqo
 
 import android.app.Application
+import com.gauvain.seigneur.goqo.dataAdapter.injection.adapterModule
 import com.gauvain.seigneur.goqo.dataAdapter.injection.remoteDataSourceModule
+import com.gauvain.seigneur.goqo.domain.injection.useCaseModule
+import com.gauvain.seigneur.goqo.presentation.injection.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +20,10 @@ class GoQoApplication : Application() {
             androidFileProperties()
             modules(
                 listOf(
-                    remoteDataSourceModule
+                    remoteDataSourceModule,
+                    adapterModule,
+                    useCaseModule,
+                    viewModelModule
                 )
             )
         }
