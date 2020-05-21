@@ -1,5 +1,6 @@
 package com.gauvain.seigneur.goqo.dataAdapter.adapter
 
+import android.util.Log
 import com.gauvain.seigneur.goqo.dataAdapter.RandomUserService
 import com.gauvain.seigneur.goqo.dataAdapter.model.PaginedUserReponse
 import com.gauvain.seigneur.goqo.dataAdapter.model.toModel
@@ -12,10 +13,11 @@ import retrofit2.Response
 class GetRandomUsersAdapter(private val service: RandomUserService) :
     GetRandomUsersProvider {
 
-    override fun get(page: Int, perPage: Long): List<UserModel> {
+    override fun get(page: Int, perPage: Int): List<UserModel> {
         val result = runCatching {
             service.getPaginedUsers(page, perPage).execute()
         }.onFailure {
+            Log.d("ramdomUserAdap", "error $it ${it.message}")
             throw GetRandomUsersException(RequestExceptionType.UNKNOWN_HOST, it.message)
         }
         return handleResult(result)

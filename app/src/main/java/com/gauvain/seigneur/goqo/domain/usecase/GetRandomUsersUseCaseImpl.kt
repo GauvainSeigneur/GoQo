@@ -10,7 +10,7 @@ import com.gauvain.seigneur.goqo.domain.provider.GetRandomUsersProvider
 internal class GetRandomUsersUseCaseImpl(private val provider: GetRandomUsersProvider) :
     GetRandomUsersUseCase {
 
-    override suspend fun invoke(page:Int, perPage:Long): Outcome<List<UserModel>, ErrorType> {
+    override suspend fun invoke(page:Int, perPage:Int): Outcome<List<UserModel>, ErrorType> {
         return try {
             val result = provider.get(page, perPage)
             Outcome.Success(result)

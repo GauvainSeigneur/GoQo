@@ -6,7 +6,7 @@ import com.gauvain.seigneur.goqo.domain.model.UserModel
 import com.gauvain.seigneur.goqo.domain.provider.GetRandomUsersProvider
 
 interface GetRandomUsersUseCase {
-    suspend fun invoke(page:Int, perPage:Long): Outcome<List<UserModel>, ErrorType>
+    suspend fun invoke(page:Int, perPage:Int): Outcome<List<UserModel>, ErrorType>
 
     companion object {
         fun create(provider: GetRandomUsersProvider): GetRandomUsersUseCase =

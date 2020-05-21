@@ -8,37 +8,40 @@ data class User(
     val name: UserName,
     @SerializedName("id")
     val id: UserId,
-    val pictures: UserPicture
+    val pictures: UserPicture?,
+    @SerializedName("email")
+    val email: String
 )
 
 fun User.toModel() : UserModel = UserModel(
-    id = this.id.value,
+    id = this.id.value?:"randomTodo",
     firstName = this.name.first,
     lastName =  this.name.last,
-    picture = this.pictures.medium
+    picture = this.pictures?.large?: this.pictures?.medium?: this.pictures?.thumbnail?: "" ,
+    email = this.email
 )
 
 
 data class UserName(
     @SerializedName("first")
     val first: String,
-    @SerializedName("lasyt")
+    @SerializedName("last")
     val last: String
 )
 
 data class UserId(
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("value")
-    val value: String
+    val value: String?
 )
 
 data class UserPicture(
     @SerializedName("large")
-    val large: String,
+    val large: String?,
     @SerializedName("medium")
-    val medium: String,
+    val medium: String?,
     @SerializedName("thumbnail")
-    val thumbnail: String
+    val thumbnail: String?
 )
 

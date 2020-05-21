@@ -6,7 +6,7 @@ import java.lang.Exception
 
 interface GetRandomUsersProvider {
     @Throws(GetRandomUsersException::class)
-    fun get(page: Int, perPage: Long): List<UserModel>
+    fun get(page: Int, perPage: Int): List<UserModel>
 }
 
 class GetRandomUsersException(
