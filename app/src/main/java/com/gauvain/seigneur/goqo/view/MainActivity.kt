@@ -1,7 +1,8 @@
-package com.gauvain.seigneur.goqo
+package com.gauvain.seigneur.goqo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gauvain.seigneur.goqo.R
 
 class MainActivity : AppCompatActivity() {
 
