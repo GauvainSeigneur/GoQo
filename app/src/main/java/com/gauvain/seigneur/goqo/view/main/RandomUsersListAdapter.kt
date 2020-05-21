@@ -1,4 +1,4 @@
-package com.gauvain.seigneur.goqo.view
+package com.gauvain.seigneur.goqo.view.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import com.gauvain.seigneur.goqo.presentation.data.UserItemData
 
 class RandomUsersListAdapter(
-    private val listener: Listener) : PagedListAdapter<UserItemData, UserItemViewHolder>
+    private val listener: Listener
+) : PagedListAdapter<UserItemData, UserItemViewHolder>
     (DiffCallback) {
 
     interface Listener {
         fun onClick(
-            id:String?
+            id:UserItemData?
         )
     }
 

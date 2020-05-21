@@ -1,6 +1,5 @@
 package com.gauvain.seigneur.goqo.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.gauvain.seigneur.goqo.domain.Outcome
@@ -17,20 +16,19 @@ import kotlinx.coroutines.withContext
 class RandomUsersDataSource(
     val scope: CoroutineScope,
     val useCase: GetRandomUsersUseCase
-) : PageKeyedDataSource<Int, UserModel>(){
-
-    private var isLastPage= false
+) : PageKeyedDataSource<Int, UserModel>() {
 
     val initialLoadingData = MutableLiveData<LoadingState>()
     val initialError = MutableLiveData<ErrorData>()
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, UserModel>) {
-        Log.d("lol", "loadInitial called")
+    override fun loadInitial(
+        params: LoadInitialParams<Int>,
+        callback: LoadInitialCallback<Int, UserModel>
+    ) {
         scope.launch(Dispatchers.Main) {
             val result = withContext(Dispatchers.IO) {
                 useCase.invoke(1, params.requestedLoadSize)
             }
-            Log.d("lol", "result $result")
             initialLoadingData.value = LoadingState.IS_LOADING
             when (result) {
                 is Outcome.Success -> {
@@ -48,20 +46,15 @@ class RandomUsersDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, UserModel>) {
-        Log.d("lol", "loadAfter called")
-        if(!isLastPage) {
-            scope.launch(Dispatchers.Main) {
-                val result = withContext(Dispatchers.IO) {
-                    useCase.invoke(params.key, params.requestedLoadSize)
+        scope.launch(Dispatchers.Main) {
+            val result = withContext(Dispatchers.IO) {
+                useCase.invoke(params.key, params.requestedLoadSize)
+            }
+            when (result) {
+                is Outcome.Success -> {
+                    callback.onResult(result.model, params.key + 1)
                 }
-
-                Log.d("lol", "loadAfter result $result")
-                when (result) {
-                    is Outcome.Success -> {
-                        callback.onResult(result.model, params.key + 1)
-                    }
-                    is Outcome.Error -> {
-                    }
+                is Outcome.Error -> {
                 }
             }
         }
@@ -69,6 +62,4 @@ class RandomUsersDataSource(
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, UserModel>) {
     }
-
-
 }

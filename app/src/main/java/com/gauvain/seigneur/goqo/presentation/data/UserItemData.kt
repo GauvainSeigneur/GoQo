@@ -1,10 +1,13 @@
 package com.gauvain.seigneur.goqo.presentation.data
 
-import com.gauvain.seigneur.goqo.presentation.StringPresenter
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class UserItemData(
     val id: String,
-    val name: StringPresenter,
+    val firstName: String,
+    val lastName: String,
     val email: String,
     val picture: String
-)
+):Parcelable

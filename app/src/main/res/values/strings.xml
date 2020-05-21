@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GoQo</string>
     <string name="user_first_last_name">%1$s %2$s</string>
+    <string name="common_error_info">Oops, something went wrong</string>
 </resources>

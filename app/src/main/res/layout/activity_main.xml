@@ -5,13 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
-
-    <Button
-        android:id="@+id/lolbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="lol"/>
+    tools:context=".view.main.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"

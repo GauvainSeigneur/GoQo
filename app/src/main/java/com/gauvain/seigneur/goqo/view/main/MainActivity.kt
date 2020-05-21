@@ -1,4 +1,4 @@
-package com.gauvain.seigneur.goqo.view
+package com.gauvain.seigneur.goqo.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gauvain.seigneur.goqo.R
+import com.gauvain.seigneur.goqo.presentation.data.UserItemData
 import com.gauvain.seigneur.goqo.presentation.viewmodel.MainViewModel
+import com.gauvain.seigneur.goqo.view.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), RandomUsersListAdapter.Listener  {
+class MainActivity : AppCompatActivity(),
+    RandomUsersListAdapter.Listener {
 
 
     private val viewModel: MainViewModel by viewModel()
@@ -21,22 +24,16 @@ class MainActivity : AppCompatActivity(), RandomUsersListAdapter.Listener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initAdapter()
-
-            viewModel.fetchUsersFromService()
-
-
-
-
-
-
-
+        viewModel.fetchUsersFromService()
         viewModel.usersList?.observe(this, Observer {
             adapter.submitList(it)
         })
     }
 
-    override fun onClick(id: String?) {
-
+    override fun onClick(data: UserItemData?) {
+        data?.let {
+            startActivity(DetailsActivity.newIntent(this, it))
+        }
     }
 
     private fun initAdapter() {

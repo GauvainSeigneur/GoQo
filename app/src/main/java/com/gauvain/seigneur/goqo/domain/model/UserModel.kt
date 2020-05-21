@@ -1,7 +1,5 @@
 package com.gauvain.seigneur.goqo.domain.model
 
-import com.gauvain.seigneur.goqo.R
-import com.gauvain.seigneur.goqo.presentation.StringPresenter
 import com.gauvain.seigneur.goqo.presentation.data.UserItemData
 
 data class UserModel(
@@ -14,7 +12,8 @@ data class UserModel(
 
 fun UserModel.toData() : UserItemData =  UserItemData(
     id = this.id,
-    name = StringPresenter(R.string.user_first_last_name, this.firstName, this.lastName),
+    firstName = this.firstName,
+    lastName = this.lastName,
     picture = this.picture,
     email = this.email
 )
