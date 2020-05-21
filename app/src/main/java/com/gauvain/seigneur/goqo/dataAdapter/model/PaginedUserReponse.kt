@@ -6,8 +6,10 @@ data class PaginedUserReponse(
     @SerializedName("results")
     val users: List<User>,
     @SerializedName("info")
-    val info: ResponseInfo
-)
+    val info: ResponseInfo,
+    @SerializedName("error")
+    override val error: String? = null
+):BaseResponse()
 
 data class ResponseInfo(
     @SerializedName("seed")

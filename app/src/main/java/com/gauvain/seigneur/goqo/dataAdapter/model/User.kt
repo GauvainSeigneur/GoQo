@@ -1,5 +1,6 @@
 package com.gauvain.seigneur.goqo.dataAdapter.model
 
+import com.gauvain.seigneur.goqo.domain.model.UserModel
 import com.google.gson.annotations.SerializedName
 
 data class User(
@@ -9,6 +10,14 @@ data class User(
     val id: UserId,
     val pictures: UserPicture
 )
+
+fun User.toModel() : UserModel = UserModel(
+    id = this.id.value,
+    firstName = this.name.first,
+    lastName =  this.name.last,
+    picture = this.pictures.medium
+)
+
 
 data class UserName(
     @SerializedName("first")
@@ -32,3 +41,4 @@ data class UserPicture(
     @SerializedName("thumbnail")
     val thumbnail: String
 )
+
