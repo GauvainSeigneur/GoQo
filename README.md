@@ -27,7 +27,7 @@ throw a dedicated exception.
 In this module the useCases are in charge to call the provider and transform the result (a
 business model or a dedicated exception) into an outcome<Model, Error> to be handled by
 presentation layer.
-#### Presentatiobn
+#### Presentation
 Presentation are in charge to provides dedicated LiveDate or Event according to result received
 by the domain layer. It tranform business model into Data to be displayed by View layer.
 #### View
